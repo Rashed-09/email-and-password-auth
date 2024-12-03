@@ -1,11 +1,14 @@
 
 const Register = () => {
-
-
+ 
+  const submitButtonHandlar = e => {
+    e.preventDefault()
+    console.log("submit button is working")
+  }
     
     return (
       <div className="w-3/4 mx-auto">
-        <form className="flex flex-col p-1">
+        <form onSubmit={submitButtonHandlar} className="flex flex-col p-1">
           <input
             className="w-full p-2 rounded-md"
             type="email"
