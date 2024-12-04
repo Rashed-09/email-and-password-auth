@@ -1,5 +1,25 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 const HeroRegister = () => {
+
+
+  const HeroRegisterHandlar = e => {
+    e.preventDefault()
+
+    const email = e.target.emaill.value;
+    const password = e.target.passwordd.value;
+    
+    createUserWithEmailAndPassword(auth, email, password)
+    .then (response => {
+      const user = response;
+      console.log(user)
+    })
+    .catch (errors => {
+      const message = errors.message;
+      console.log(message)
+    })
+  }
     return (
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -12,7 +32,7 @@ const HeroRegister = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={HeroRegisterHandlar} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -20,6 +40,7 @@ const HeroRegister = () => {
                 <input
                   type="email"
                   placeholder="email"
+                  name="emaill"
                   className="input input-bordered"
                   required
                 />
@@ -31,6 +52,7 @@ const HeroRegister = () => {
                 <input
                   type="password"
                   placeholder="password"
+                  name= "passwordd"
                   className="input input-bordered"
                   required
                 />
@@ -41,7 +63,7 @@ const HeroRegister = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Register</button>
               </div>
             </form>
           </div>
